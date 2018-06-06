@@ -5,6 +5,27 @@ const {
   GraphQLSchema
 } = graphql;
 
+// dummy data
+let records = [{
+    id: '1',
+    name: 'Vontade De Rever Você',
+    genre: 'Boogie'
+  }, {
+    id: '2',
+    name: 'Marcos Valle',
+    genre: 'Funk/Soul'
+  },
+  {
+    id: '3',
+    name: 'Off The Wall',
+    genre: 'Funk/Soul'
+  }, {
+    id: '4',
+    name: 'Discovery',
+    genre: 'Electronic'
+  }
+]
+
 const RecordType = new GraphQLObjectType({
   name: 'Record',
   fields: () => ({
@@ -22,8 +43,8 @@ const RecordType = new GraphQLObjectType({
 
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
-  fileds: {
-    record: {
+  fields: {
+    book: {
       type: RecordType,
       args: {
         id: {
@@ -31,7 +52,8 @@ const RootQuery = new GraphQLObjectType({
         }
       },
       resolve(parent, args) {
-        //Code to get data from db or other source
+        // code to get data from db / other source
+        return records.find(record => record.id === args.id);
       }
     }
   }
