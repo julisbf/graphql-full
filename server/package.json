@@ -1,0 +1,14 @@
+{
+  "name": "graphql-server",
+  "version": "1.0.0",
+  "description": "This an example of how to use GraphQL on the server side",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Juliana BF",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
