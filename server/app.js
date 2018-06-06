@@ -7,7 +7,8 @@ const PORT = 4000;
 //Set up middleware endpoint to understand GraphQL
 app.use('/graphql', graphqlHTTP({
   // Define schema
-  schema
+  schema,
+  graphiql: true
 }));
 
 app.listen(PORT, () => {
