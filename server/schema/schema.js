@@ -106,6 +106,37 @@ const RootQuery = new GraphQLObjectType({
   }
 });
 
+/**
+ * Type: Mutation
+ * This allows us to mutate or change/update our DB
+ */
+
+const Mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    addArtist: {
+      type: ArtistType,
+      args: {
+        name: {
+          type: GraphQLString
+        },
+        country: {
+          type: GraphQLString
+        }
+      },
+      resolve(parent, args) {
+        let artist = new Artist({
+          name: args.name,
+          country: args.country
+        });
+        return artist.save();
+      }
+    }
+  }
+})
+
+
 module.exports = new GraphQLSchema({
-  query: RootQuery
+  query: RootQuery,
+  mutation: Mutation
 });
