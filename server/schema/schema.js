@@ -44,7 +44,7 @@ const RecordType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
-    book: {
+    record: {
       type: RecordType,
       args: {
         id: {
