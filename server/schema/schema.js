@@ -143,6 +143,18 @@ const RootQuery = new GraphQLObjectType({
         // code to get data from db / other source
         return artists.find(artist => artist.id === args.id);
       }
+    },
+    records: {
+      type: new GraphQLList(RecordType),
+      resolve(parent, args) {
+        return records;
+      }
+    },
+    artists: {
+      type: new GraphQLList(ArtistType),
+      resolve(parent, args) {
+        return artists;
+      }
     }
   }
 });
