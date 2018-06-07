@@ -4,7 +4,8 @@ const {
   GraphQLString,
   GraphQLSchema,
   GraphQLID,
-  GraphQLInt
+  GraphQLInt,
+  GraphQLList
 } = graphql;
 
 // dummy data
@@ -33,6 +34,18 @@ let records = [{
     genre: 'Electronic',
     year: 2001,
     artistId: '3'
+  }, {
+    id: '5',
+    name: 'Around the World',
+    genre: 'Electronic',
+    year: 1997,
+    artistId: '3'
+  }, {
+    id: '6',
+    name: 'Bad',
+    genre: 'Funk/Soul',
+    year: 1987,
+    artistId: '2'
   }
 ]
 
@@ -94,6 +107,12 @@ const ArtistType = new GraphQLObjectType({
     },
     country: {
       type: GraphQLString
+    },
+    records: {
+      type: new GraphQLList(RecordType),
+      resolve(parent, args) {
+        return records.filter(record => record.artistId === parent.id);
+      }
     }
   })
 });
