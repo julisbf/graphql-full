@@ -2,7 +2,8 @@ const graphql = require('graphql');
 const {
   GraphQLObjectType,
   GraphQLString,
-  GraphQLSchema
+  GraphQLSchema,
+  GraphQLID
 } = graphql;
 
 // dummy data
@@ -30,7 +31,7 @@ const RecordType = new GraphQLObjectType({
   name: 'Record',
   fields: () => ({
     id: {
-      type: GraphQLString
+      type: GraphQLID
     },
     name: {
       type: GraphQLString
@@ -48,7 +49,7 @@ const RootQuery = new GraphQLObjectType({
       type: RecordType,
       args: {
         id: {
-          type: GraphQLString
+          type: GraphQLID
         }
       },
       resolve(parent, args) {
