@@ -8,62 +8,9 @@ const {
   GraphQLList
 } = graphql;
 
-// dummy data
-let records = [{
-    id: '1',
-    name: 'Vontade De Rever Você',
-    genre: 'Boogie',
-    year: 1981,
-    artistId: '1'
-  }, {
-    id: '2',
-    name: 'Marcos Valle',
-    genre: 'Funk/Soul',
-    year: 2017,
-    artistId: '1'
-  },
-  {
-    id: '3',
-    name: 'Off The Wall',
-    genre: 'Funk/Soul',
-    year: 1979,
-    artistId: '2'
-  }, {
-    id: '4',
-    name: 'Discovery',
-    genre: 'Electronic',
-    year: 2001,
-    artistId: '3'
-  }, {
-    id: '5',
-    name: 'Around the World',
-    genre: 'Electronic',
-    year: 1997,
-    artistId: '3'
-  }, {
-    id: '6',
-    name: 'Bad',
-    genre: 'Funk/Soul',
-    year: 1987,
-    artistId: '2'
-  }
-]
-
-let artists = [{
-    id: '1',
-    name: 'Marcos Valle',
-    country: 'Brazil'
-  }, {
-    id: '2',
-    name: 'Michael Jackson',
-    country: 'USA'
-  },
-  {
-    id: '3',
-    name: 'Daft Punk',
-    country: 'France'
-  }
-]
+//Models Schema from DB
+const Record = require('../models/record');
+const Artist = require('../models/artist');
 
 /**
  * Type: RecordType
@@ -86,7 +33,7 @@ const RecordType = new GraphQLObjectType({
     artist: { //Type relative. Connects both queries
       type: ArtistType,
       resolve(parent, args) {
-        return artists.find(artist => artist.id === parent.artistId);
+        //return artists.find(artist => artist.id === parent.artistId);
       }
     }
   })
@@ -111,7 +58,7 @@ const ArtistType = new GraphQLObjectType({
     records: {
       type: new GraphQLList(RecordType),
       resolve(parent, args) {
-        return records.filter(record => record.artistId === parent.id);
+        //return records.filter(record => record.artistId === parent.id);
       }
     }
   })
@@ -129,7 +76,7 @@ const RootQuery = new GraphQLObjectType({
       },
       resolve(parent, args) {
         // code to get data from db / other source
-        return records.find(record => record.id === args.id);
+        //return records.find(record => record.id === args.id);
       }
     },
     artist: {
@@ -141,19 +88,19 @@ const RootQuery = new GraphQLObjectType({
       },
       resolve(parent, args) {
         // code to get data from db / other source
-        return artists.find(artist => artist.id === args.id);
+        //return artists.find(artist => artist.id === args.id);
       }
     },
     records: {
       type: new GraphQLList(RecordType),
       resolve(parent, args) {
-        return records;
+        //return records;
       }
     },
     artists: {
       type: new GraphQLList(ArtistType),
       resolve(parent, args) {
-        return artists;
+        //return artists;
       }
     }
   }
