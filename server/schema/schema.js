@@ -34,6 +34,7 @@ const RecordType = new GraphQLObjectType({
       type: ArtistType,
       resolve(parent, args) {
         //return artists.find(artist => artist.id === parent.artistId);
+        return Artist.findById(parent.artist.id);
       }
     }
   })
@@ -59,6 +60,9 @@ const ArtistType = new GraphQLObjectType({
       type: new GraphQLList(RecordType),
       resolve(parent, args) {
         //return records.filter(record => record.artistId === parent.id);
+        return Record.find({
+          artistId: parent.id
+        });
       }
     }
   })
@@ -77,6 +81,7 @@ const RootQuery = new GraphQLObjectType({
       resolve(parent, args) {
         // code to get data from db / other source
         //return records.find(record => record.id === args.id);
+        return Record.findById(args.id);
       }
     },
     artist: {
@@ -89,18 +94,21 @@ const RootQuery = new GraphQLObjectType({
       resolve(parent, args) {
         // code to get data from db / other source
         //return artists.find(artist => artist.id === args.id);
+        return Artist.findById(args.id);
       }
     },
     records: {
       type: new GraphQLList(RecordType),
       resolve(parent, args) {
         //return records;
+        return Record.find({});
       }
     },
     artists: {
       type: new GraphQLList(ArtistType),
       resolve(parent, args) {
         //return artists;
+        return Artist.find({});
       }
     }
   }
@@ -130,6 +138,32 @@ const Mutation = new GraphQLObjectType({
           country: args.country
         });
         return artist.save();
+      }
+    },
+    addRecord: {
+      type: RecordType,
+      args: {
+        name: {
+          type: GraphQLString
+        },
+        genre: {
+          type: GraphQLString
+        },
+        year: {
+          type: GraphQLInt
+        },
+        artistId: {
+          type: GraphQLID
+        }
+      },
+      resolve(parent, args) {
+        let record = new Record({
+          name: args.name,
+          genre: args.genre,
+          year: args.year,
+          artistId: args.artistId
+        });
+        return record.save();
       }
     }
   }
