@@ -5,7 +5,8 @@ const {
   GraphQLSchema,
   GraphQLID,
   GraphQLInt,
-  GraphQLList
+  GraphQLList,
+  GraphQLNonNull
 } = graphql;
 
 //Models Schema from DB
@@ -126,10 +127,10 @@ const Mutation = new GraphQLObjectType({
       type: ArtistType,
       args: {
         name: {
-          type: GraphQLString
+          type: new GraphQLNonNull(GraphQLString)
         },
         country: {
-          type: GraphQLString
+          type: new GraphQLNonNull(GraphQLString)
         }
       },
       resolve(parent, args) {
@@ -144,16 +145,16 @@ const Mutation = new GraphQLObjectType({
       type: RecordType,
       args: {
         name: {
-          type: GraphQLString
+          type: new GraphQLNonNull(GraphQLString)
         },
         genre: {
-          type: GraphQLString
+          type: new GraphQLNonNull(GraphQLString)
         },
         year: {
-          type: GraphQLInt
+          type: new GraphQLNonNull(GraphQLInt)
         },
         artistId: {
-          type: GraphQLID
+          type: new GraphQLNonNull(GraphQLID)
         }
       },
       resolve(parent, args) {
