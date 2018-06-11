@@ -12,13 +12,21 @@ const getRecordsQuery = gql`
 `
 
 class RecordList extends Component {
+  displayRecords() {
+    let data = this.props.data
+
+    if (data.loading) {
+      return <div> Loading inventory...</div>
+    } else {
+      return data.records.map(record => {
+        return <li key={record.id}>{record.name}</li>
+      })
+    }
+  }
   render() {
-    console.log(this.props)
     return (
       <div>
-        <ul id="record-list">
-          <li>Record Name</li>
-        </ul>
+        <ul id="record-list">{this.displayRecords()}</ul>
       </div>
     )
   }
