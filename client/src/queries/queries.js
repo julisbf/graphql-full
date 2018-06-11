@@ -21,8 +21,8 @@ const getArtistsQuery = gql `
 `
 
 const addRecordMutation = gql `
-  mutation {
-    addRecord(name:"", genre:"", year:0, artistId:"") {
+  mutation($name: String!, $genre:String!, $year:Int!, $artistId:ID!) {
+    addRecord(name:$name, genre:$genre, year:$year, artistId:$artistId) {
       name
       id
     }

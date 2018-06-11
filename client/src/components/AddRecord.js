@@ -25,7 +25,14 @@ class AddRecord extends Component {
   }
   submitForm(evt) {
     evt.preventDefault()
-    this.props.addRecordMutation() //adds records
+    this.props.addRecordMutation({
+      variables: {
+        name: this.state.name,
+        genre: this.state.genre,
+        year: this.state.year,
+        artistId: this.state.artistId
+      }
+    }) //adds records
   }
   render() {
     return (
