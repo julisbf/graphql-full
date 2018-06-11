@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { graphql, compose } from 'react-apollo'
-import { getArtistsQuery, addRecordMutation } from '../queries/queries'
+import {
+  getArtistsQuery,
+  addRecordMutation,
+  getRecordsQuery
+} from '../queries/queries'
 
 class AddRecord extends Component {
   constructor(props) {
@@ -31,8 +35,9 @@ class AddRecord extends Component {
         genre: this.state.genre,
         year: this.state.year,
         artistId: this.state.artistId
-      }
-    }) //adds records
+      },
+      refetchQueries: [{ query: getRecordsQuery }]
+    }) //adds records and rerendering the record's list
   }
   render() {
     return (
