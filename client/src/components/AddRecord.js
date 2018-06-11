@@ -3,6 +3,15 @@ import { graphql } from 'react-apollo'
 import { getArtistsQuery } from '../queries/queries'
 
 class AddRecord extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      name: '',
+      genre: '',
+      year: '',
+      artistId: ''
+    }
+  }
   displayArtists() {
     let data = this.props.data
 
@@ -14,24 +23,41 @@ class AddRecord extends Component {
       })
     }
   }
+  submitForm(evt) {
+    evt.preventDefault()
+    console.log(this.state)
+  }
   render() {
     return (
-      <form id="add-record">
+      <form id="add-record" onSubmit={this.submitForm.bind(this)}>
         <div className="field">
           <label>Record name:</label>
-          <input type="text" />
+          <input
+            type="text"
+            onChange={evt => this.setState({ name: evt.target.value })}
+          />
         </div>
         <div className="field">
           <label>Genre:</label>
-          <input type="text" />
+          <input
+            type="text"
+            onChange={evt => this.setState({ genre: evt.target.value })}
+          />
         </div>
         <div className="field">
           <label>Year:</label>
-          <input type="text" />
+          <input
+            type="text"
+            onChange={evt =>
+              this.setState({ year: parseInt(evt.target.value, 10) })
+            }
+          />
         </div>
         <div className="field">
           <label>Artist:</label>
-          <select>
+          <select
+            onChange={evt => this.setState({ artistId: evt.target.value })}
+          >
             <option>Select artist</option>
             {this.displayArtists()}
           </select>
