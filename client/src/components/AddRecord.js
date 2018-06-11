@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { graphql } from 'react-apollo'
-import { getArtistsQuery } from '../queries/queries'
+import { graphql, compose } from 'react-apollo'
+import { getArtistsQuery, addRecordMutation } from '../queries/queries'
 
 class AddRecord extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class AddRecord extends Component {
     }
   }
   displayArtists() {
-    let data = this.props.data
+    let data = this.props.getArtistsQuery
 
     if (data.loading) {
       return <option> Loading inventory...</option>
@@ -25,7 +25,7 @@ class AddRecord extends Component {
   }
   submitForm(evt) {
     evt.preventDefault()
-    console.log(this.state)
+    this.props.addRecordMutation() //adds records
   }
   render() {
     return (
@@ -68,4 +68,7 @@ class AddRecord extends Component {
   }
 }
 
-export default graphql(getArtistsQuery)(AddRecord)
+export default compose(
+  graphql(getArtistsQuery, { name: 'getArtistsQuery' }),
+  graphql(addRecordMutation, { name: 'addRecordMutation' })
+)(AddRecord)

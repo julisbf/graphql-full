@@ -20,7 +20,17 @@ const getArtistsQuery = gql `
   }
 `
 
+const addRecordMutation = gql `
+  mutation {
+    addRecord(name:"", genre:"", year:0, artistId:"") {
+      name
+      id
+    }
+  }
+`
+
 export {
   getArtistsQuery,
-  getRecordsQuery
+  getRecordsQuery,
+  addRecordMutation
 };
