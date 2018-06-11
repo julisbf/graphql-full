@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import RecordList from './components/RecordList'
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
+import RecordList from './components/RecordList'
+import AddRecord from './components/AddRecord'
 
 //Apollo Client Setup
 const client = new ApolloClient({
@@ -15,6 +16,7 @@ class App extends Component {
         <div id="main">
           <h1> Records Inventory </h1>
           <RecordList />
+          <AddRecord />
         </div>
       </ApolloProvider>
     )
