@@ -8,15 +8,21 @@ class RecordDetails extends Component {
     if (record) {
       return (
         <div>
-          <h2>{record.name}</h2>
-          <p>{record.artist.name}</p>
-          <p>
-            {record.genre} - {record.year}
-          </p>
+          <h2>
+            {record.name}{' '}
+            <span className="record-info">
+              ({record.genre} / {record.year})
+            </span>
+          </h2>
+          <h3>{record.artist.name}</h3>
           <p>All records by this artist:</p>
           <ul className="other-records">
             {record.artist.records.map(item => {
-              return <li key={item.id}>{item.name}</li>
+              return (
+                <li key={item.id}>
+                  {item.name} ({item.year})
+                </li>
+              )
             })}
           </ul>
         </div>
