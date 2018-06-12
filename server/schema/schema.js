@@ -35,7 +35,7 @@ const RecordType = new GraphQLObjectType({
       type: ArtistType,
       resolve(parent, args) {
         //return artists.find(artist => artist.id === parent.artistId);
-        return Artist.findById(parent.artist.id);
+        return Artist.findById(parent.artistId);
       }
     }
   })
