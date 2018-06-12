@@ -23,7 +23,11 @@ class AddRecord extends Component {
       return <option> Loading inventory...</option>
     } else {
       return data.artists.map(artist => {
-        return <option key={artist.id}>{artist.name}</option>
+        return (
+          <option key={artist.id} value={artist.id}>
+            {artist.name}
+          </option>
+        )
       })
     }
   }
