@@ -29,8 +29,29 @@ const addRecordMutation = gql `
   }
 `
 
+const getRecordQuery = gql `
+  query GetRecord($id: ID) {
+    record(id: $id) {
+      id
+      name
+      genre
+      year
+      artist {
+        id
+        name
+        records {
+          id
+          name
+          year
+        }
+      }
+    }
+  }
+`
+
 export {
   getArtistsQuery,
   getRecordsQuery,
-  addRecordMutation
+  addRecordMutation,
+  getRecordQuery
 };
