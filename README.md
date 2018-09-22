@@ -1,4 +1,4 @@
-# Example to try and learn GraphQL with ReactJS
+# Example GraphQL with ReactJS
 
 [![node](https://img.shields.io/badge/node-v9.10.0-blue.svg)](https://nodejs.org/en/)
 [![npm](https://img.shields.io/badge/npm-v6.4.0-green.svg)](https://www.npmjs.com/)
